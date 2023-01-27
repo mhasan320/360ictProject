@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { launchesApi } from '../service/launches'
+import searchSlice from "../app/feature/searchSlice"
 
 export const store = configureStore({
   reducer: {
     [launchesApi.reducerPath]: launchesApi.reducer,
+    search: searchSlice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(launchesApi.middleware),
