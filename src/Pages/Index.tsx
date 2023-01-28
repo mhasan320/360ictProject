@@ -15,7 +15,6 @@ export default function Index() {
   const [upcoming, setUpcoming] = useState<boolean>();
   const { data, error, isLoading } = useGetLanuchesByNameQuery('launches');
   
-  console.log(data);
   useEffect(() => {
     setFullLunch(data);
   }, [data])
@@ -36,6 +35,29 @@ export default function Index() {
     setUpcoming(e.target.value);
     let statusData = data.filter((dStatus: any) => dStatus.upcoming === JSON.parse(e.target.value));
     setFullLunch(statusData);
+  }
+
+  const fliterYearHandler = (e: any) => {
+    if(e.target.value === 'lastYear'){
+      // last year
+      let statusData = data.filter((dStatus: any) => dStatus.launch_year === 2022);
+      setFullLunch(statusData);
+      setFilter('lastYear');
+    } else if (e.target.value === 'lastWeek'){
+      // last month
+      var today = new Date();
+      var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+      let statusData = data.filter((dStatus: any) => dStatus.launch_date_local === lastWeek);
+      setFullLunch(statusData);
+      setFilter('lastWeek');
+    } else {
+      // last month
+      var todayDate = new Date();
+      var lastMonth = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate() - 30);
+      let statusData = data.filter((dStatus: any) => dStatus.launch_date_local === lastMonth);
+      setFullLunch(statusData);
+      setFilter('lastMonth');
+    }
   }
 
   if(isLoading){
@@ -65,10 +87,10 @@ export default function Index() {
           <br />
           <Text>Lauanching Date</Text>
           <br /><br />
-          <Radio.Group value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <Radio.Button value="large">Last Week</Radio.Button>
-            <Radio.Button value="default">Last Month</Radio.Button>
-            <Radio.Button value="small">Last Year</Radio.Button>
+          <Radio.Group value={filter} onChange={fliterYearHandler}>
+            <Radio.Button value="lastWeek">Last Week</Radio.Button>
+            <Radio.Button value="lastMonth">Last Month</Radio.Button>
+            <Radio.Button value="lastYear">Last Year</Radio.Button>
           </Radio.Group>
           <Divider></Divider>
           <Text>Lanunching Status</Text>
