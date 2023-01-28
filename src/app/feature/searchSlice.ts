@@ -9,7 +9,7 @@ const initialState: CounterState = {
     searchValue: '',
 }
 
-export const searchSlice = createSlice({
+export const searchSlice: any = createSlice({
   name: 'searchbar',
   initialState,
   reducers: {

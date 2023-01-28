@@ -16,9 +16,9 @@ code {
   border-bottom: 1px solid #eee;
   padding-bottom: .5rem;
 }
-h2, h3, h4, h5, p{
+h2, h3, h4, h5, h1, p{
   padding: 0;
-  margin: 0;
+  margin: 0px !important;
 }
 .success{
   color: #fff;
@@ -46,4 +46,10 @@ h2, h3, h4, h5, p{
 .ant-input-affix-wrapper{
   margin: 0rem 1.5rem 2rem;
   width: 95%;
+}
+.detailsPage{
+  width: 100%;
+  max-width: 70%;
+  margin: 1rem auto 0;
+
 }
